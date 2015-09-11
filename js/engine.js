@@ -144,6 +144,8 @@ var Engine = (function(global) {
      * tick. It's purpose is to then call the render functions you have defined
      * on your enemy and player entities within app.js
      */
+
+
     function renderEntities() {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
@@ -174,7 +176,9 @@ var Engine = (function(global) {
         'images/enemy-bug.png',
         'images/char-boy.png'
     ]);
+
     Resources.onReady(init);
+
 
     /* Assign the canvas' context object to the global variable (the window
      * object when run in a browser) so that developer's can use it more easily
