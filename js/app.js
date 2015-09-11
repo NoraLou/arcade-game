@@ -14,8 +14,10 @@ var Enemy = function() {
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
     this.x += this.speed;
-    this.col = this.x/101;
-
+    this.col = Math.floor(this.x/101);
+    if(this.col > 5){
+        this.reset();
+    };
 };
 
 // Draw the enemy on the screen, required method for game
@@ -48,7 +50,6 @@ Player.prototype.update = function(dt){
 };
 
 Player.prototype.render = function() {
-    // console.log(this.sprite);
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
