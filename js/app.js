@@ -1,18 +1,36 @@
+
+//helper function
+var getRandomInt = function(max, min){
+    return Math.random()* (max-min) + min;
+}
+
 var Enemy = function() {
     this.sprite = 'images/enemy-bug.png';
+    this.reset();// set starting attributes
+
 };
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
+    this.x += this.speed;
+    this.col = this.x/101;
+
 };
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+//declare starting positions.speed
+Enemy.prototype.reset = function(){
+    this.col= -1;//no real row yet
+    this.x = (Math.floor(Math.random()*90))* -1; //neg num btwn 0 & -70
+    console.log(this.x);
+    this.row = Math.floor(getRandomInt(1,4));
+    this.y = (this.row * 83)-20;// row offset by 20
+    this.speed = getRandomInt(1,8);
 };
 
 
@@ -21,8 +39,9 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 var Player = function(){
     this.sprite = 'images/char-boy.png';
-    this.x = 200;
-    this.y = 400;
+    this.x = (Math.floor(Math.random()*70))* -1
+    this.y = this.row * 83
+    this.row = 6
 };
 
 Player.prototype.update = function(dt){
@@ -43,23 +62,16 @@ Player.prototype.handleInput = function(){
 
 };
 
-
-var getRandomInt = function(max){
-    return Math.floor(Math.random()* max);
-}
-
 var makeEnemies = function(num){
-    var allEnemies = []
+    var allEnemies = [];
     for(var i = 0; i < num; i++){
         var enemy = new Enemy();
-        enemy.x = 0;
-        enemy.y = getRandomInt(220);
         allEnemies.push(enemy)
     }
     return allEnemies;
 }
 
-var allEnemies = makeEnemies(3);
+var allEnemies = makeEnemies(1);
 
 console.log(allEnemies);
 
